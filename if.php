@@ -4,6 +4,8 @@ $a = 5;
 $b = 10;
 $c = '10';
 
+// Misunderstood exercises. I was supposed to write correct description in english.
+
 if ($a < $b) {
     // TODO: Replace the blanks with the correct description
     echo "$a is < $b\n";
