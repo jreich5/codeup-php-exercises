@@ -33,5 +33,20 @@ foreach ($books as $title => $book) {
     echo PHP_EOL;
 }
 
+echo '===============================' . PHP_EOL;
+
+foreach ($books as $title => $book) {
+    if ($book['published'] > 1950) {
+        echo $title . PHP_EOL;
+        foreach ($book as $info => $data) {
+            echo "$info = $data" . PHP_EOL;
+    }
+    echo PHP_EOL;
+    echo PHP_EOL;
+
+    }
+}
+
+
 
 
