@@ -24,6 +24,10 @@ function modulus($a, $b) {
     return ($a % $b);
 }
 
+function square($a) {
+    return ($a * $a);
+}
+
 // Add code to test your functions here
 
 echo 'Result of add ' . add(10, 10) . PHP_EOL;
@@ -31,3 +35,4 @@ echo 'Result of subtract ' . subtract(10, 10) . PHP_EOL;
 echo 'Result of multiply ' . multiply(10, 10) . PHP_EOL;
 echo 'Result of divide ' . divide(10, 10) . PHP_EOL;
 echo 'Result of modulus ' . modulus(11, 10) . PHP_EOL;
+echo 'Result of square ' . square(11) . PHP_EOL;
