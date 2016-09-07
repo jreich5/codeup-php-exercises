@@ -7,6 +7,7 @@ function logMessage($logLevel, $message)
         $filename = "log-" . date("Y-m-d");
         $handle = fopen($filename, 'a');
         fwrite($handle, date("Y-m-d h:m:s") . " " . "[" . $logLevel . "]" . " " . $message . PHP_EOL);
+        fclose($handle);
     } else {
         echo 'File arguments missing. Please enter log level and message.';
         die;
