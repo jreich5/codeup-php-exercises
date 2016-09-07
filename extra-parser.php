@@ -1,51 +1,51 @@
 <?php
-// Bonus exercise incomplete
 
-function parseContacts($filename)
+function parseSalesData($filename)
 {
-    // $message = '';
+    $message = '';
     $handle = fopen($filename, 'r');
-    $contacts = fread($handle, filesize($filename));
-    $contacts = explode(PHP_EOL, $contacts);
-    array_splice($contacts, 0, 14);
-    // $message .= "There are currently " . count($contacts) . " employees." . PHP_EOL;
+    $salesInfo = fread($handle, filesize($filename));
+    $salesInfo = explode(PHP_EOL, $salesInfo);
+    array_splice($salesInfo, 0, 14);
+    $message .= "There are currently " . count($salesInfo) . " employees." . PHP_EOL;
     $totalSales = null;
-    foreach ($contacts as $key => $contact) {
-        $contacts[$key] = explode(', ', $contact); 
+    foreach ($salesInfo as $key => $contact) {
+        $salesInfo[$key] = explode(', ', $contact); 
     }
-    foreach ($contacts as $info) {
-            $info = explode(',', $info);
+    foreach ($salesInfo as $contact) {
+        $totalSales += (int) $contact[3];
+    }
+    $message .= "There are $totalSales units that have been sold." . PHP_EOL;
+    $averageSales = $totalSales / count($salesInfo);
+    $message .= "The average sale count per employee is $averageSales." . PHP_EOL . PHP_EOL;
+    $message .= "UNITS       |       NAME                |                   EMPLOYEE NUMBER" . PHP_EOL;
+
+    foreach ($salesInfo as $key => $rep) {
+        $formattedArray = [
+            'sales' => $rep[3],
+            'name' => $rep[1] . ' ' . $rep[2],
+            'employee number' => $rep[0],
+        ];
+        $salesInfo[$key] = $formattedArray;
+    }
+    arsort($salesInfo);
+
+    foreach ($salesInfo as $rep) {
+        $count = 0;
+        foreach ($rep as $info) {
+            $count += 1;
+            if ($count < 3) {
+                $message .= str_pad($info, 20*$count);
+            } else {
+                $message .= $info;
+            }
         }
-    // foreach ($contacts as $contact) {
-    //     $totalSales += (int) $contact[3];
-    // }
-    // $message .= "There are $totalSales units that have been sold." . PHP_EOL;
-    // $averageSales = $totalSales / count($contacts);
-    // $message .= "The average sale count per employee is $averageSales." . PHP_EOL . PHP_EOL;
-    // $message .= "Units    |    Full Name    |    Employee Number" . PHP_EOL;
-    
-    arsort($contacts);
-    // function salesRanker ($list, $message) 
-    // {
-    //     $totalList = [];
-    //     foreach ($list as $employee) {
-    //         $report = $employee[3] . "," . $employee[1] . " " . $employee[2] . "," . $employee[0] . PHP_EOL;
-    //         array_push($totalList, $report);
-    //     }
+        $message .= PHP_EOL;
+    }
 
-       
-        
-    //     return $totalList;
-        
-    // }
-
-    // $message = salesRanker($contacts, $message);
-
-
-
-
+    // print_r($salesInfo);
     fclose($handle);
-    return $contacts;
+    return $message;
 }
 
-print_r(parseContacts('extra-output.txt'));
+print_r(parseSalesData('extra-output.txt'));
