@@ -13,19 +13,16 @@ function logMessage($logLevel, $message)
     }
 }
 
-function logError($error) 
+function logError($message) 
 {
-    logMessage($error, "This is an info message.");
+    logMessage('ERROR', $message);
 }
 
 function logInfo($message) 
 {
-    logMessage("ERROR", $message);
+    logMessage("INFO", $message);
 }
 
-
-logError('FATAL');
+logError('Fatal error.');
 logInfo('This is an extra message.');
 
-
-// date("h:m:sa")
