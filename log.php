@@ -8,7 +8,6 @@ class Log
     {
         if (isset($logLevel) && isset($message)) {
             fwrite($handle, date("Y-m-d h:m:s") . " " . "[" . $logLevel . "]" . " " . $message . PHP_EOL);
-            fclose($handle);
         } else {
             echo 'File arguments missing. Please enter log level and message.';
             die;
@@ -26,6 +25,10 @@ class Log
     {
         $this->filename = $prefix . date("Y-m-d");
         $handle = fopen($this->filename, 'a');
+    }
+    public __destructor()
+    {
+        fclose($handle);
     }
 }
 
