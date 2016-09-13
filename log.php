@@ -21,12 +21,12 @@ class Log
     {
         $this->logMessage("INFO", $message);
     }
-    public __contructor($prefix = 'log')
+    public function __construct($prefix = 'log')
     {
         $this->filename = $prefix . date("Y-m-d");
         $this->handle = fopen($this->filename, 'a');
     }
-    public __destructor()
+    public function __destruct()
     {
         fclose($this->handle);
     }
