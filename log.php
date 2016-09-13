@@ -7,7 +7,7 @@ class Log
     public function logMessage($logLevel, $message)
     {
         if (isset($logLevel) && isset($message)) {
-            fwrite($handle, date("Y-m-d h:m:s") . " " . "[" . $logLevel . "]" . " " . $message . PHP_EOL);
+            fwrite($this->handle, date("Y-m-d h:m:s") . " " . "[" . $logLevel . "]" . " " . $message . PHP_EOL);
         } else {
             echo 'File arguments missing. Please enter log level and message.';
             die;
@@ -24,11 +24,11 @@ class Log
     public __contructor($prefix = 'log')
     {
         $this->filename = $prefix . date("Y-m-d");
-        $handle = fopen($this->filename, 'a');
+        $this->handle = fopen($this->filename, 'a');
     }
     public __destructor()
     {
-        fclose($handle);
+        fclose($this->handle);
     }
 }
 
