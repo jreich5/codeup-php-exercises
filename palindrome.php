@@ -4,7 +4,7 @@
 
 function is_palindrome ($string) 
 {
-    $characters = [",", "'", " ", "!", "-", ";", ".", "/", '"'];
+    $characters = [",", "'", " ", "!", "-", ";", ".", "/", ":"];
     $stripped = str_replace($characters, '', $string);
     echo $stripped . PHP_EOL;
     $stripped = strtolower($stripped);
@@ -19,7 +19,10 @@ function is_palindrome ($string)
     
 }
 
-echo is_palindrome('Are we not pure? “No sir!” Panama’s moody Noriega brags. “It is garbage!” Irony dooms a man; a prisoner up to new era.') . PHP_EOL;
+
+echo is_palindrome('A man, a plan, a canal: Panama') . PHP_EOL;
+echo is_palindrome("No 'x' in 'Nixon") . PHP_EOL;
+
 
 
 

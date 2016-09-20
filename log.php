@@ -1,9 +1,16 @@
 <?php 
 
+echo 'Imported log.php' . PHP_EOL;
+
 class Log 
 {
     public $filename;
     public $handle;
+    public function __construct($prefix = 'log')
+    {
+        $this->filename = $prefix . date("Y-m-d");
+        $this->handle = fopen($this->filename, 'a');
+    }
     public function logMessage($logLevel, $message)
     {
         if (isset($logLevel) && isset($message)) {
@@ -20,11 +27,6 @@ class Log
     public function logInfo($message) 
     {
         $this->logMessage("INFO", $message);
-    }
-    public function __construct($prefix = 'log')
-    {
-        $this->filename = $prefix . date("Y-m-d");
-        $this->handle = fopen($this->filename, 'a');
     }
     public function __destruct()
     {
