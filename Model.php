@@ -23,7 +23,6 @@ abstract class Model
         self::dbConnect();
         // @TODO: Initialize the $attributes property with the passed value
         $this->attributes = $attributes;
-
     }
 
     // +++++++++++++++++++++FINISHED
@@ -36,7 +35,7 @@ abstract class Model
     {
         if (!self::$dbc) {
             // @TODO: Connect to database
-            self::$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+            self::$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS); // define constants in a partial file Constants.php
 
             // Tell PDO to throw exceptions on error
             self::$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -86,6 +85,16 @@ abstract class Model
                 $this->insert();
             }        
         }
+    }
+
+    public function delete($id)
+    {
+        $query = 'DELETE FROM users WHERE id = :id';
+        $stmt = self::$dbc->prepare($query);
+        // @TODO: You will need to iterate through all the attributes to build the prepared query
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        $stmt->execute();
+
     }
 
     // +++++++++++++++++++++FINISHED
